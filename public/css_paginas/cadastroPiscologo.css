@@ -128,8 +128,8 @@ a:hover {
 }
 
 .form-grid {
-    /* Layout responsivo para agrupar campos, especialmente em telas maiores */
-    display: grid;
+    
+    display: contents;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-bottom: 20px;
@@ -245,3 +245,71 @@ body.dark-mode .toggle-password {
     /* Ícone de senha em dark mode */
     color: #aaa;
 }
+.input-with-icon {
+      position: relative;
+    }
+
+    body.dark-mode {
+      background-color: #353131;
+      color: #e0e0e0;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    /* ADICIONE ESTE ESTILO */
+    .input-with-icon {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #666;
+      z-index: 2;
+    }
+
+    .error {
+      border: 1px solid red !important;
+    }
+    
+    /* NOVOS ESTILOS PARA O CHECKLIST DE SENHA */
+    .password-checklist {
+      margin-top: 8px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+    
+    .dark-mode .password-checklist {
+      background-color: #2a2a2a;
+    }
+    
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    
+    .checklist-icon {
+      margin-right: 8px;
+      width: 16px;
+      text-align: center;
+    }
+    
+    .checklist-icon.incomplete {
+      color: #d32f2f;
+    }
+    
+    .checklist-icon.complete {
+      color: #388e3c;
+    }
