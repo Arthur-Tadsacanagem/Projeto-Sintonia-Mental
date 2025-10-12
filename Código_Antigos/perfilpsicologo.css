@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url('pexels-pixabay-53594.jpg') no-repeat center center/cover;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Altera a direção para coluna em telas menores */
+    width: 90%;
+    max-width: 1200px;
+    height: auto; /* Ajusta a altura para auto em telas menores */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ada3a366;
+}
+
+/* Barra lateral */
+.sidebar {
+    width: 100%; /* Ajusta a largura para 100% em telas menores */
+    background-color: #2c3e50;
+    padding: 20px;
+    color: white;
+}
+
+/* Área principal */
+.main-content {
+    width: 100%; /* Ajusta a largura para 100% em telas menores */
+    padding: 20px;
+}
+
+/* Ajustes para exibição lado a lado */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row; /* Mantém a direção em linha para telas maiores */
+        height: 90vh; /* Define a altura para 90vh em telas maiores */
+    }
+
+    .sidebar {
+        width: 25%; /* Mantém a largura da barra lateral para 25% em telas maiores */
+    }
+
+    .main-content {
+        width: 75%; /* Mantém a largura da área principal para 75% em telas maiores */
+    }
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-info input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.main-content h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column; /* Altera a direção para coluna em telas menores */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Ajustes para exibição lado a lado */
+@media (min-width: 768px) {
+    .card {
+        flex-direction: row; /* Mantém a direção em linha para telas maiores */
+    }
+}
+
+.card-left {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.card-left label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.card-left input {
+    display: block;
+    width: 100%;
+}
+
+/* Informações ao lado direito do cartão */
+.card-right {
+    flex: 2;
+    padding-left: 15px;
+}
+
+.card-right input, 
+.card-right textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 40px;
+}
+
+
+button, .forgot-password{
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #ddd;
+    color: black;
+    border: none;
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin: 5px 0; /* Ajuste de margem para espaçamento */
+}
+
+button:hover, .forgot-password:hover, .navigate:hover, a.button-style:hover {
+    background-color: #2980b9;
+    color: white;
+}

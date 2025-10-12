@@ -1,0 +1,257 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo do corpo */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('pexels-pixabay-53594.jpg') no-repeat center center/cover;
+    color: #333;
+    line-height: 1.6;
+    font-size: 18px; /* Aumentado para melhorar a legibilidade */
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('pexels-pixabay-53594.jpg') no-repeat center center/cover;
+    z-index: -1; /* Fica atrás de todo o conteúdo */
+    transition: background 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Película escura no modo escuro */
+body.modo-escuro::before {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                url('pexels-pixabay-53594.jpg') no-repeat center center/cover;
+}
+/* Ajuste global para tamanho dinâmico de texto */
+body.fonte-grande * {
+    font-size: 1.25em; /* Aumenta 25% o tamanho da fonte */
+    line-height: 1.8;
+}
+
+body.fonte-pequena * {
+    font-size: 0.875em; /* Diminui 12.5% o tamanho da fonte */
+    line-height: 1.4;
+}
+
+/* Cabeçalho */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.modo-escuro header {
+    background-color: #1f1f1f; /* Fundo escuro no modo escuro */
+    color: #ffffff; /* Texto branco no modo escuro */
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    color: #333;
+    transition: color 0.3s;
+}
+
+body.modo-escuro h1 {
+    color: #ffffff; /* Título branco no modo escuro */
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+body.modo-escuro nav ul li a {
+    color: #ffffff;
+}
+
+/* Seção de introdução */
+.intro-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo transparente no modo claro */
+    border-radius: 12px;
+    max-width: 1200px;
+    margin: 50px auto;
+    transition: background-color 0.3s ease;
+}
+
+body.modo-escuro .intro-section {
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo mais escuro no modo escuro */
+}
+
+
+
+body.modo-escuro .intro-section::after {
+    background-color: rgba(0, 0, 0, 0.5); /* Película mais escura no modo escuro */
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.intro-image {
+    flex: 0 0 200px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.intro-text {
+    max-width: 600px;
+}
+
+.intro-text h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+body.modo-escuro .intro-text h2,
+body.modo-escuro .intro-text p {
+    color: #ffffff;
+}
+
+.intro-text p {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Cartão do psicólogo */
+.perfil-usuario {
+    display: flex;
+    align-items: flex-start; /* Alinha itens no topo */
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    gap: 20px;
+    overflow: hidden; /* Garante que nada extravase os limites */
+}
+
+body.modo-escuro .perfil-usuario {
+    background-color: #1f1f1f;
+}
+
+/* Estilo da imagem no cartão (formato 3x4) */
+.perfil-usuario img {
+    flex: 0 0 120px;
+    width: 120px; /* Largura fixa */
+    height: 160px; /* Altura fixa para 3x4 */
+    border-radius: 8px; /* Bordas levemente arredondadas */
+    object-fit: cover; /* Ajusta a imagem sem distorcer */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Detalhes do cartão */
+.perfil-detalhes {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-grow: 1;
+    white-space: pre-wrap; /* Permite que o texto quebre linhas */
+    word-wrap: break-word;
+    word-break: break-word; /* Garante quebra para palavras longas */
+    overflow-wrap: break-word;
+}
+
+.perfil-detalhes h2 {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 600;
+}
+
+body.modo-escuro .perfil-detalhes h2,
+body.modo-escuro .perfil-detalhes p {
+    color: #ffffff;
+}
+
+/* Estilo dos textos no cartão */
+.perfil-detalhes p {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5; /* Melhor espaçamento entre linhas */
+    word-break: break-word;
+}
+
+.perfil-detalhes p {
+    color: #555;
+    font-size: 1rem;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 50px;
+    background-color: #333;
+    color: #ffffff;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.modo-escuro footer {
+    background-color: #1f1f1f;
+}
+
+/* Acessibilidade */
+.acessibilidade button {
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+}
+
+body.modo-escuro .acessibilidade button {
+    background-color: #555;
+    color: #ffffff;
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintonia Mental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url('pexels-pixabay-53594.jpg') no-repeat center center/cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            font-size: 16px; /* Tamanho de fonte padrão */
+        }
+
+        /* Classes para ajuste de fonte */
+        .fonte-grande {
+            font-size: 18px;
+        }
+
+        .fonte-pequena {
+            font-size: 14px;
+        }
+        
+        /* Sobreposição para o modo escuro */
+        .dark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+            display: none;
+        }
+
+        .modo-escuro .dark-overlay {
+            display: block;
+        }
+
+        .login-card {
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            background-color: #ffffff66;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .login-card input,
+        .login-card button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .login-card input {
+            margin-bottom: 10px;
+        }
+
+        .login-card input.error {
+            border-color: red;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .login-card button {
+            background-color: #ffffff;
+            color: #333;
+            border: 2px solid #ccc;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 15px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .login-card button:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
+        }
+
+        .acessibilidade {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .acessibilidade button {
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .modo-escuro .login-card {
+            background-color: #333333aa;
+            color: #eee;
+        }
+
+        .modo-escuro button {
+            background-color: #555;
+            color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sobreposição para o modo escuro -->
+    <div class="dark-overlay"></div>
+
+    <!-- Botões de Acessibilidade -->
+    <div class="acessibilidade">
+        <button id="aumentar-fonte">A+</button>
+        <button id="diminuir-fonte">A-</button>
+        <button id="toggle-tema">Modo Escuro</button>
+    </div>
+
+    <div class="login-card">
+        <img src="favicon.ico" alt="Imagem do cartão">
+        <h2>Cadastre-se Psicologo</h2>
+        <div class="error-message" id="nomeError"></div>
+        <input type="text" id="nome" name="Nome completo" placeholder="Seu nome">
+        
+        <div class="error-message" id="emailError"></div>
+        <input type="email" id="email" name="Email" placeholder="Seu e-mail">
+        
+        <div class="error-message" id="senhaError"></div>
+        <input type="password" id="senha" name="Senha" placeholder="Sua senha">
+        
+        <div class="error-message" id="confirmarSenhaError"></div>
+        <input type="password" id="confirmarSenha" name="SENHA" placeholder="Confirme a senha">
+        
+        <div class="error-message" id="contatoError"></div>
+        <input type="number" id="contato" name="Seu contato" placeholder="(xx) xxxxx-xxx">
+        
+        <button type="button" id="submitButton">Entrar</button>
+    </div>
+
+</body>
+</html>

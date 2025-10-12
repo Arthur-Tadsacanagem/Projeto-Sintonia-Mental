@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Feedbacks Registrados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* === ESTILOS GERAIS (INÍCIO DO TEMA PSICÓLOGO) === */
+        body {
+            font-family: 'Poppins', sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa; /* Fundo claro e moderno */
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Estilos para o modo escuro */
+        body.dark-mode {
+            background-color: #121212; /* Fundo escuro total */
+            color: #e0e0e0;
+        }
+        
+        .header h1 {
+            color: #3a5a9f; /* Cor primária do perfil do psicólogo */
+        }
+        body.dark-mode .header h1 {
+            color: #8faed9;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .feedback-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .feedback-card {
+            background: #ffffff; /* Fundo branco no modo claro */
+            padding: 20px;
+            border-radius: 12px; /* Borda mais arredondada */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode .feedback-card {
+            background: #1e1e1e; /* Fundo escuro do perfil */
+            border-color: #444;
+        }
+
+        .rating {
+            color: #ffc107;
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        .paciente-info {
+            font-style: italic;
+            color: #3a5a9f; /* Cor primária para destaque */
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .paciente-info {
+            color: #a0c4ff;
+        }
+
+        .date {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .date {
+            color: #ccc;
+        }
+
+        /* --- ESTILO DO FORMULÁRIO DE FEEDBACK (CORES DO PSICÓLOGO) --- */
+        .feedback-form {
+            background: #e6f2ff; /* Fundo claro para formulário */
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark-mode .feedback-form {
+            background: #333; /* Fundo escuro para formulário */
+        }
+        
+        body.dark-mode .feedback-form h2 {
+            color: #fff;
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            min-height: 100px;
+            border: 1px solid #ccc;
+            border-radius: 8px; /* Mais arredondado */
+            background-color: #fff;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        body.dark-mode textarea, body.dark-mode select {
+            background-color: #444;
+            color: #eee;
+            border-color: #555;
+        }
+        
+        /* Estilo para botões gerais (CORES MODERNAS) */
+        button {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #3a5a9f 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+            font-size: 16px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
+            background: linear-gradient(135deg, #2980b9 0%, #3a5a9f 100%);
+        }
+
+        /* Estilos da barra de acessibilidade (mantidos) */
+        .acessibilidade {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .acessibilidade button {
+            background-color: #3a5a9f; /* Cor primária do perfil */
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .acessibilidade button:hover {
+            background-color: #2c3e50;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+
+<body>
+
+    <div class="acessibilidade">
+        <button id="aumentar-fonte">A+</button>
+        <button id="diminuir-fonte">A-</button>
+        <button id="toggle-tema">Modo Escuro</button>
+    </div>
+
+    <div class="header">
+        <h1>Feedbacks Registrados</h1>
+        <p>Avaliações dos nossos atendimentos</p>
+    </div>
+
+    <div id="all-feedbacks">
+        </div>
+
+    <div id="auth-alert" class="hidden">
+        <p>Você precisa estar logado como paciente para enviar feedback.</p>
+        <a href="/login-paciente">Fazer login</a>
+    </div>
+
+    <div id="feedback-form-container" class="hidden">
+        <div class="feedback-form">
+            <h2>Envie seu feedback</h2>
+            <div class="rating-input">
+                <label>Avaliação:</label>
+                <select id="rating">
+                    <option value="5">Excelente ★★★★★</option>
+                    <option value="4">Muito bom ★★★★☆</option>
+                    <option value="3">Bom ★★★☆☆</option>
+                    <option value="2">Regular ★★☆☆☆</option>
+                    <option value="1">Ruim ★☆☆☆☆</option>
+                </select>
+                <label for="atendimentoSelect">Selecione o Atendimento:</label>
+                <select id="atendimentoSelect"></select>
+            </div>
+            <textarea id="comentario" placeholder="Deixe seu comentário (opcional)"></textarea>
+            <button id="enviar-feedback">Enviar Feedback</button>
+        </div>
+    </div>
+
+    <script>
+        const toggleTemaBtn = document.getElementById("toggle-tema");
+        
+        // --- FUNÇÕES DE ACESSIBILIDADE ---
+        toggleTemaBtn.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            // Salvando o estado
+            localStorage.setItem("modoEscuro", document.body.classList.contains("dark-mode"));
+        });
+
+        // Controle de tamanho de fonte
+        let fontSize = 16; 
+        const aumentarFonteBtn = document.getElementById("aumentar-fonte");
+        const diminuirFonteBtn = document.getElementById("diminuir-fonte");
+
+        function ajustarFonte(tamanho) {
+            document.querySelectorAll('body, h1, h2, p, label, select, textarea, button, .feedback-card, .acessibilidade button').forEach(el => {
+                el.style.fontSize = `${tamanho}px`;
+            });
+        }
+
+        aumentarFonteBtn.addEventListener("click", () => {
+            if (fontSize < 24) { 
+                fontSize += 2;
+                ajustarFonte(fontSize);
+            }
+        });
+
+        diminuirFonteBtn.addEventListener("click", () => {
+            if (fontSize > 10) { 
+                fontSize -= 2;
+                ajustarFonte(fontSize);
+            }
+        });
+        
+        // Carregar Modo Escuro ao Iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem("modoEscuro") === "true") {
+                document.body.classList.add("dark-mode");
+            }
+        });
+        
+        // --- FUNÇÕES DE LÓGICA (CARREGAR FEEDBACKS E ENVIO) ---
+
+        async function loadAllFeedbacks() {
+            try {
+                const response = await fetch('/todos-feedbacks');
+                const feedbacks = await response.json();
+
+                const container = document.getElementById('all-feedbacks');
+                container.innerHTML = '';
+
+                if (feedbacks.length === 0) {
+                    container.innerHTML = '<p>Nenhum feedback registrado ainda.</p>';
+                    return;
+                }
+
+                const feedbackList = document.createElement('div');
+                feedbackList.className = 'feedback-list';
+
+                feedbacks.forEach(feedback => {
+                    const card = document.createElement('div');
+                    card.className = 'feedback-card';
+
+                    // Criar estrelas de avaliação
+                    const stars = '★'.repeat(feedback.nota) + '☆'.repeat(5 - feedback.nota);
+                    const pacienteInfoText = feedback.paciente_nome ? `Paciente: ${feedback.paciente_nome}` : 'Paciente: Anônimo';
+
+                    card.innerHTML = `
+                    <div class="rating">${stars}</div>
+                    ${feedback.comentario ? `<p>"${feedback.comentario}"</p>` : '<p>(Sem comentário)</p>'}
+                    <div class="paciente-info">${pacienteInfoText}</div>
+                    <div class="date">${new Date(feedback.criado_em).toLocaleDateString()}</div>
+                `;
+
+                    feedbackList.appendChild(card);
+                });
+
+                container.appendChild(feedbackList);
+            } catch (error) {
+                console.error('Erro ao carregar feedbacks:', error);
+                document.getElementById('all-feedbacks').innerHTML =
+                    '<p>Erro ao carregar feedbacks. Por favor, tente novamente.</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadAllFeedbacks();
+
+            const authResponse = await fetch('/verificar-sessao-paciente');
+            const authResult = await authResponse.json();
+
+            if (authResult.autenticado) {
+                document.getElementById('feedback-form-container').classList.remove('hidden');
+
+                // Carregar atendimentos
+                const atendimentoSelect = document.getElementById('atendimentoSelect');
+                const atendimentosResponse = await fetch('/meus-atendimentos-json');
+                const atendimentosResult = await atendimentosResponse.json();
+
+                if (atendimentosResult.atendimentos.length === 0) {
+                    const opt = document.createElement('option');
+                    opt.textContent = 'Nenhum atendimento encontrado';
+                    opt.disabled = true;
+                    atendimentoSelect.appendChild(opt);
+                } else {
+                    atendimentosResult.atendimentos.forEach(att => {
+                        const opt = document.createElement('option');
+                        opt.value = `${att.atendimento_id}|${att.psicologo_id}`;
+                        opt.textContent = `${att.psicologo_nome} (ID ${att.atendimento_id})`;
+                        atendimentoSelect.appendChild(opt);
+                    });
+                }
+
+                document.getElementById('enviar-feedback').addEventListener('click', async () => {
+                    const nota = document.getElementById('rating').value;
+                    const comentario = document.getElementById('comentario').value;
+                    const selected = atendimentoSelect.value;
+
+                    if (!selected) {
+                        alert("Selecione um atendimento.");
+                        return;
+                    }
+
+                    const [atendimento_id, psicologo_id] = selected.split('|');
+
+                    try {
+                        const response = await fetch('/salvar-feedback', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                nota,
+                                comentario,
+                                atendimento_id,
+                                psicologo_id
+                            })
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            alert('Obrigado pelo seu feedback!');
+                            window.location.reload();
+                        } else {
+                            alert(result.error || 'Erro ao enviar feedback');
+                        }
+                    } catch (error) {
+                        console.error('Erro:', error);
+                        alert('Erro ao conectar com o servidor');
+                    }
+                });
+
+            } else {
+                document.getElementById('auth-alert').classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>

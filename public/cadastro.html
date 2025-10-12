@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro Psicólogo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css_paginas/cadastro.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <style>
+    .input-with-icon {
+      position: relative;
+    }
+
+    body.dark-mode {
+      background-color: #353131;
+      color: #e0e0e0;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    /* ADICIONE ESTE ESTILO */
+    .input-with-icon {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #666;
+      z-index: 2;
+    }
+
+    .error {
+      border: 1px solid red !important;
+    }
+    
+    /* NOVOS ESTILOS PARA O CHECKLIST DE SENHA */
+    .password-checklist {
+      margin-top: 8px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+    
+    .dark-mode .password-checklist {
+      background-color: #2a2a2a;
+    }
+    
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    
+    .checklist-icon {
+      margin-right: 8px;
+      width: 16px;
+      text-align: center;
+    }
+    
+    .checklist-icon.incomplete {
+      color: #d32f2f;
+    }
+    
+    .checklist-icon.complete {
+      color: #388e3c;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="acessibilidade">
+    <button id="aumentar-fonte">A+</button>
+    <button id="diminuir-fonte">A-</button>
+    <button id="toggle-tema">Modo Escuro</button>
+  </div>
+
+  <div class="login-card">
+    <form action="/cadastrar" method="POST">
+      <img src="img/favicon.ico" alt="Imagem do cartão">
+      <h2>Cadastre-se Psicólogo</h2>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <div class="error-message" id="nomeError"></div>
+          <label>Nome:<br>
+            <input type="text" id="Nome" name="nome" required placeholder="Digite seu nome">
+          </label>
+        </div>
+
+        <div class="form-group">
+          <div class="error-message" id="cpfError"></div>
+          <label>CPF:<br>
+            <input type="text" id="CPF" name="cpf" required placeholder="000.000.000-00">
+          </label>
+        </div>
+
+        <div class="form-group">
+          <div class="error-message" id="emailError"></div>
+          <label>E-mail:<br>
+            <input type="text" id="Email" name="login" required placeholder="Digite seu e-mail">
+          </label>
+        </div>
+
+        <div class="form-group">
+          <div class="error-message" id="senhaError"></div>
+          <label>Senha:<br>
+            <div class="input-with-icon">
+              <input type="password" id="Senha" name="senha" required placeholder="Digite sua senha">
+              <i class="fas fa-eye toggle-password" data-target="Senha"></i>
+            </div>
+          </label>
+          <!-- CHECKLIST DE SENHA -->
+          <div class="password-checklist" id="passwordChecklist">
+            <div class="checklist-item" id="checkLength">
+              <span class="checklist-icon incomplete">✗</span>
+              <span>Mínimo 8 caracteres</span>
+            </div>
+            <div class="checklist-item" id="checkSpecial">
+              <span class="checklist-icon incomplete">✗</span>
+              <span>Pelo menos 1 caractere especial</span>
+            </div>
+            <div class="checklist-item" id="checkUppercase">
+              <span class="checklist-icon incomplete">✗</span>
+              <span>Pelo menos 1 letra maiúscula</span>
+            </div>
+            <div class="checklist-item" id="checkNumber">
+              <span class="checklist-icon incomplete">✗</span>
+              <span>Pelo menos 1 número</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="error-message" id="confirmarSenhaError"></div>
+          <label>Confirmar Senha:<br>
+            <div class="input-with-icon">
+              <input type="password" id="ConfirmarSenha" name="confirmarSenha" required
+                placeholder="Confirme sua senha">
+              <i class="fas fa-eye toggle-password" data-target="ConfirmarSenha"></i>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="error-message" id="generalError"></div>
+      <button type="submit" id="submitButton">Cadastrar</button>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+  <script>
+    // Alternância de modo escuro
+    const toggleTemaBtn = document.getElementById("toggle-tema");
+    toggleTemaBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    // Controle de tamanho de fonte
+    let fontSize = 16;
+    const aumentarFonteBtn = document.getElementById("aumentar-fonte");
+    const diminuirFonteBtn = document.getElementById("diminuir-fonte");
+
+    function ajustarFonte(tamanho) {
+      document.querySelectorAll('body, input, button, h1').forEach(el => {
+        el.style.fontSize = `${tamanho}px`;
+      });
+    }
+
+    aumentarFonteBtn.addEventListener("click", () => {
+      fontSize += 2;
+      ajustarFonte(fontSize);
+    });
+
+    diminuirFonteBtn.addEventListener("click", () => {
+      if (fontSize > 12) {
+        fontSize -= 2;
+        ajustarFonte(fontSize);
+      }
+    });
+
+    // Validação do formulário
+    document.querySelector('form').addEventListener('submit', function (event) {
+      const nome = document.getElementById('Nome');
+      const cpf = document.getElementById('CPF');
+      const email = document.getElementById('Email');
+      const senha = document.getElementById('Senha');
+      const confirmarSenha = document.getElementById('ConfirmarSenha');
+
+      const nomeError = document.getElementById('nomeError');
+      const cpfError = document.getElementById('cpfError');
+      const emailError = document.getElementById('emailError');
+      const senhaError = document.getElementById('senhaError');
+      const confirmarSenhaError = document.getElementById('confirmarSenhaError');
+      const generalError = document.getElementById('generalError');
+
+      nomeError.innerText = '';
+      cpfError.innerText = '';
+      emailError.innerText = '';
+      senhaError.innerText = '';
+      confirmarSenhaError.innerText = '';
+      generalError.innerText = '';
+
+      nome.classList.remove('error');
+      cpf.classList.remove('error');
+      email.classList.remove('error');
+      senha.classList.remove('error');
+      confirmarSenha.classList.remove('error');
+
+      let hasError = false;
+
+      const nomeValor = nome.value.trim();
+      if (nomeValor === '') {
+        nomeError.innerText = 'O campo nome é obrigatório.';
+        nome.classList.add('error');
+        hasError = true;
+      } else if (nomeValor.split(' ').length < 2) {
+        nomeError.innerText = 'Digite pelo menos nome e sobrenome.';
+        nome.classList.add('error');
+        hasError = true;
+      }
+
+
+      if (!validarCPF(cpf.value)) {
+        cpfError.innerText = 'CPF inválido.';
+        cpf.classList.add('error');
+        hasError = true;
+      }
+
+      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!regexEmail.test(email.value)) {
+        emailError.innerText = 'Por favor, insira um e-mail válido.';
+        email.classList.add('error');
+        hasError = true;
+      }
+
+      const regexCaractereEspecial = /[!@#$%^&*(),.?":{}|<>]/;
+      const regexMaiuscula = /[A-Z]/;
+      const regexNumero = /[0-9]/;
+
+      if (senha.value !== confirmarSenha.value) {
+        confirmarSenhaError.innerText = 'As senhas não coincidem.';
+        confirmarSenha.classList.add('error');
+        hasError = true;
+      } else if (senha.value.length < 8 ||
+        !regexCaractereEspecial.test(senha.value) ||
+        !regexMaiuscula.test(senha.value) ||
+        !regexNumero.test(senha.value)) {
+        senhaError.innerText = 'A senha deve ter no mínimo 8 caracteres, 1 caractere especial, 1 maiúscula e 1 número.';
+        senha.classList.add('error');
+        hasError = true;
+      }
+
+      if (hasError) {
+        event.preventDefault();
+      }
+    });
+
+    function validarCPF(cpf) {
+      cpf = cpf.replace(/[^\d]+/g, '');
+      if (cpf.length != 11 || /^(\d)\1+$/.test(cpf)) return false;
+
+      let soma = 0, resto;
+      for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+      resto = (soma * 10) % 11;
+      if (resto == 10 || resto == 11) resto = 0;
+      if (resto != parseInt(cpf.substring(9, 10))) return false;
+
+      soma = 0;
+      for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+      resto = (soma * 10) % 11;
+      if (resto == 10 || resto == 11) resto = 0;
+      if (resto != parseInt(cpf.substring(10, 11))) return false;
+
+      return true;
+    }
+
+    // Máscara de CPF: 000.000.000-00
+    const cpfInput = document.getElementById('CPF');
+    cpfInput.addEventListener('input', () => {
+      let cpf = cpfInput.value.replace(/\D/g, '');
+      if (cpf.length > 11) cpf = cpf.slice(0, 11);
+      cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+      cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+      cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      cpfInput.value = cpf;
+    });
+
+    // CORREÇÃO PARA MOSTRAR/OCULTAR SENHAS
+    document.addEventListener('click', function (event) {
+      if (event.target.classList.contains('toggle-password') ||
+        event.target.parentElement.classList.contains('toggle-password')) {
+
+        // Encontra o ícone mais próximo
+        const icon = event.target.closest('.toggle-password');
+        const targetId = icon.getAttribute('data-target');
+        const input = document.getElementById(targetId);
+
+        if (input) {
+          // Alterna entre password/text
+          const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+          input.setAttribute('type', type);
+
+          // Alterna o ícone
+          icon.classList.toggle('fa-eye');
+          icon.classList.toggle('fa-eye-slash');
+        }
+      }
+    });
+
+    // VALIDAÇÃO EM TEMPO REAL DA SENHA
+    const senhaInput = document.getElementById('Senha');
+    const checkLength = document.getElementById('checkLength');
+    const checkSpecial = document.getElementById('checkSpecial');
+    const checkUppercase = document.getElementById('checkUppercase');
+    const checkNumber = document.getElementById('checkNumber');
+
+    senhaInput.addEventListener('input', function() {
+      const senha = senhaInput.value;
+      
+      // Verificar comprimento
+      if (senha.length >= 8) {
+        checkLength.querySelector('.checklist-icon').classList.remove('incomplete');
+        checkLength.querySelector('.checklist-icon').classList.add('complete');
+        checkLength.querySelector('.checklist-icon').textContent = '✓';
+      } else {
+        checkLength.querySelector('.checklist-icon').classList.remove('complete');
+        checkLength.querySelector('.checklist-icon').classList.add('incomplete');
+        checkLength.querySelector('.checklist-icon').textContent = '✗';
+      }
+      
+      // Verificar caractere especial
+      if (/[!@#$%^&*(),.?":{}|<>]/.test(senha)) {
+        checkSpecial.querySelector('.checklist-icon').classList.remove('incomplete');
+        checkSpecial.querySelector('.checklist-icon').classList.add('complete');
+        checkSpecial.querySelector('.checklist-icon').textContent = '✓';
+      } else {
+        checkSpecial.querySelector('.checklist-icon').classList.remove('complete');
+        checkSpecial.querySelector('.checklist-icon').classList.add('incomplete');
+        checkSpecial.querySelector('.checklist-icon').textContent = '✗';
+      }
+      
+      // Verificar letra maiúscula
+      if (/[A-Z]/.test(senha)) {
+        checkUppercase.querySelector('.checklist-icon').classList.remove('incomplete');
+        checkUppercase.querySelector('.checklist-icon').classList.add('complete');
+        checkUppercase.querySelector('.checklist-icon').textContent = '✓';
+      } else {
+        checkUppercase.querySelector('.checklist-icon').classList.remove('complete');
+        checkUppercase.querySelector('.checklist-icon').classList.add('incomplete');
+        checkUppercase.querySelector('.checklist-icon').textContent = '✗';
+      }
+      
+      // Verificar número
+      if (/[0-9]/.test(senha)) {
+        checkNumber.querySelector('.checklist-icon').classList.remove('incomplete');
+        checkNumber.querySelector('.checklist-icon').classList.add('complete');
+        checkNumber.querySelector('.checklist-icon').textContent = '✓';
+      } else {
+        checkNumber.querySelector('.checklist-icon').classList.remove('complete');
+        checkNumber.querySelector('.checklist-icon').classList.add('incomplete');
+        checkNumber.querySelector('.checklist-icon').textContent = '✗';
+      }
+    });
+  </script>
+</body>
+
+</html>

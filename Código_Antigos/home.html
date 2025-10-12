@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Sintonia Mental</title>
+    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><img src="favicon.ico" alt="icon" class="icon"> Sintonia Mental</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="perfilpsicologo.html">Perfil</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="pagLogin.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="intro-section">
+        <div class="intro-content">
+            <img src="03_04_2024, 19_57_27-Photoroom.png" alt="Representação de Saúde Mental" class="intro-image">
+            <div class="intro-text">
+                <h2>Bem-vindo ao Sintonia Mental</h2>
+                <p>Conectando você com profissionais de saúde mental dedicados ao seu bem-estar.</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="perfil-usuario">
+        <img id="foto-usuario" alt="Foto do Psicólogo" />
+        <div class="perfil-detalhes">
+            <h2 id="nome-usuario"></h2>
+            <p id="crm-usuario"></p>
+            <p id="descricao-usuario"></p>
+            <a id="whatsapp-usuario" href="" target="_blank">Contato via WhatsApp</a>
+        </div>
+    </section>
+
+    <div class="acessibilidade">
+        <button id="aumentar-fonte">A+</button>
+        <button id="diminuir-fonte">A-</button>
+        <button id="toggle-tema">Modo Escuro</button>
+    </div>
+
+    <!-- Plugin VLibras para acessibilidade em Libras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        // Exibir informações do psicólogo usando dados do localStorage
+        window.onload = function() {
+            const nome = localStorage.getItem('nome');
+            const crm = localStorage.getItem('crm');
+            const descricao = localStorage.getItem('descricao');
+            const whatsapp = localStorage.getItem('whatsapp');
+            const foto = localStorage.getItem('foto');
+
+            if (nome && crm && descricao && whatsapp && foto) {
+                document.getElementById('nome-usuario').textContent = nome;
+                document.getElementById('crm-usuario').textContent = crm;
+                document.getElementById('descricao-usuario').textContent = descricao;
+                document.getElementById('whatsapp-usuario').href = `https://wa.me/${whatsapp}`;
+                document.getElementById('foto-usuario').src = foto;
+            }
+        };
+
+        // Alternância de modo escuro
+        const toggleTemaBtn = document.getElementById("toggle-tema");
+        toggleTemaBtn.addEventListener("click", () => {
+            document.body.classList.toggle("modo-escuro");
+        });
+
+        // Aumentar e diminuir fonte
+        const aumentarFonteBtn = document.getElementById("aumentar-fonte");
+        const diminuirFonteBtn = document.getElementById("diminuir-fonte");
+
+        aumentarFonteBtn.addEventListener("click", () => {
+            document.body.classList.add("fonte-grande");
+            document.body.classList.remove("fonte-pequena");
+        });
+
+        diminuirFonteBtn.addEventListener("click", () => {
+            document.body.classList.add("fonte-pequena");
+            document.body.classList.remove("fonte-grande");
+        });
+    </script>
+
+    <footer>Email</footer>
+</body>
+</html>

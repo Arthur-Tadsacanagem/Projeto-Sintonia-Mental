@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Psicólogo</title>
+    <link rel="stylesheet" href="perfilpsicologo.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <img src="iconepng.png" alt="Avatar" class="profile-avatar" id="fotoPerfil">
+                <h2>Perfil</h2>
+            </div>
+            <div class="profile-info">
+                <h3 id="nomePerfil">Nome do Usuário</h3>
+                <p id="emailPerfil">E-mail: usuario@email.com</p>
+                <a href="#" class="forgot-password">Esqueci minha senha</a>
+            </div>
+        </aside>
+
+        <!-- Área principal -->
+        <main class="main-content">
+            <h1>Seu cartão</h1>
+            <div class="card">
+                <div class="card-left">
+                    <label for="foto">Foto:</label>
+                    <input type="file" id="foto" accept="image/*">
+                </div>
+                <div class="card-right">
+                    <input type="text" id="nome-card" placeholder="Nome"> <br>
+                    <input type="text" id="crm" placeholder="CRM"> <br>
+                    <textarea id="descricao" placeholder="Descrição do trabalho"></textarea> <br>
+                    <input type="text" id="whatsapp" placeholder="Número de WhatsApp">
+                </div>
+            </div>
+            <button onclick="salvarInformacoes()">Salvar</button>
+        </main>
+    </div>
+
+    <script>
+        // Carrega informações do perfil ao carregar a página
+        window.onload = function () {
+            const nome = localStorage.getItem('nome') || 'Nome do Usuário';
+            const crm = localStorage.getItem('crm') || '';
+            const descricao = localStorage.getItem('descricao') || '';
+            const whatsapp = localStorage.getItem('whatsapp') || '';
+            const foto = localStorage.getItem('foto');
+
+            document.getElementById('nomePerfil').innerText = nome;
+            document.getElementById('nome-card').value = nome;
+            document.getElementById('crm').value = crm;
+            document.getElementById('descricao').value = descricao;
+            document.getElementById('whatsapp').value = whatsapp;
+
+            if (foto) {
+                document.getElementById('fotoPerfil').src = foto;
+            }
+        }
+
+        // Função para salvar informações no localStorage
+        function salvarInformacoes() {
+            const nome = document.getElementById('nome-card').value;
+            const crm = document.getElementById('crm').value;
+            const descricao = document.getElementById('descricao').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const fotoInput = document.getElementById('foto').files[0];
+
+            if (nome && crm && descricao && whatsapp) {
+                if (fotoInput) {
+                    const reader = new FileReader();
+                    reader.onloadend = function () {
+                        const fotoDataUrl = reader.result;
+
+                        localStorage.setItem('nome', nome);
+                        localStorage.setItem('crm', crm);
+                        localStorage.setItem('descricao', descricao);
+                        localStorage.setItem('whatsapp', whatsapp);
+                        localStorage.setItem('foto', fotoDataUrl);
+
+                        window.location.href = 'home.html';
+                    };
+                    reader.readAsDataURL(fotoInput);
+                } else {
+                    alert("Por favor, selecione uma foto.");
+                }
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        }
+    </script>
+</body>
+</html>

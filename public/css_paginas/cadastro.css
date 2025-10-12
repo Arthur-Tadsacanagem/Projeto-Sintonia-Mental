@@ -1,0 +1,181 @@
+/* === ESTILOS GERAIS === */
+body {
+    background: url('FUNDO.jpg') no-repeat center center/cover;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #648097;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/FUNDO.jpg') no-repeat center center/cover;
+    z-index: -1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+body.dark-mode {
+    color: #e0e0e0; 
+    background-color: #121212;
+}
+
+body.dark-mode::before {
+    opacity: 0.2; 
+    background-color: rgba(0, 0, 0, 0.8);
+    mix-blend-mode: multiply;
+}
+
+/* === CARD DE LOGIN === */
+.login-card,
+.Cadastre {
+    border-radius: 15px;
+    padding: 30px;
+    width: 350px;
+    text-align: center;
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.502);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.login-card label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    box-sizing: border-box;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 15px;
+    background-color: #ffffff;
+    color: #333;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    margin-top: 10px;
+}
+
+.login-card button:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+/* === MENSAGENS DE ERRO === */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* === ACESSIBILIDADE === */
+.acessibilidade {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.acessibilidade button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+}
+
+.acessibilidade button:hover {
+    background-color: #bbb;
+}
+
+/* === MODO ESCURO === */
+body.dark-mode {
+    background-color: #353131;
+    color: #e0e0e0;
+}
+
+body.dark-mode .login-card,
+body.dark-mode .Cadastre {
+    background-color: rgba(50, 50, 50, 0.9);
+    border: 1px solid #444;
+}
+
+body.dark-mode .login-card button,
+body.dark-mode .acessibilidade button {
+    background-color: #444;
+    color: #eee;
+    border-color: #666;
+}
+
+body.dark-mode .login-card button:hover,
+body.dark-mode .acessibilidade button:hover {
+    background-color: #555;
+    border-color: #777;
+}
+
+body.dark-mode {
+    background-color: #121212;
+}
+
+body.dark-mode::before {
+    opacity: 0.5;
+}
+
+/* === REMOÇÃO DO LAYOUT EM DUAS COLUNAS === */
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
+}

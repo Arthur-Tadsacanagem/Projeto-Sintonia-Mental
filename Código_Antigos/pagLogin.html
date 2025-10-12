@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintonia Mental</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+ /* Estilos gerais */
+ body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('pexels-pixabay-53594.jpg') no-repeat center center/cover;
+            z-index: -1;
+            transition: opacity 0.3s ease-in-out;
+        }
+        /* Película escura no modo escuro */
+        .modo-escuro::before {
+            background: rgba(0, 0, 0, 0.8); /* Película escura */
+        }
+
+        /* Definindo cor branca para textos no modo escuro */
+        .modo-escuro, .modo-escuro h2, .modo-escuro p, .modo-escuro label, .modo-escuro a {
+            color: #ffffff;
+        }
+
+        body {
+            background: url('pexels-pixabay-53594.jpg') no-repeat center center/cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .login-card,
+        .Cadastre {
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            margin: 10px 0;
+            background-color: 
+            rgba(255, 255, 255, 0.502); /* Fundo claro com transparência */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .login-card label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .login-card input,
+        .login-card button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 15px;
+        }
+
+        .login-card input {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .login-card button {
+            background-color: #ffffff;
+            color: #333;
+            border: 2px solid #ccc;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 15px;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        .login-card button:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
+        }
+
+        a {
+            color: #4b6e4c;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .acessibilidade {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .acessibilidade button {
+            background-color: #ffffff;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        .acessibilidade button:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
+        }
+
+        /* Estilos para o modo escuro */
+        .modo-escuro {
+            background-color: #1a1a1a;
+            color: #eee;
+        }
+
+        .modo-escuro .login-card,
+        .modo-escuro .Cadastre {
+            background-color: rgba(50, 50, 50, 0.9); /* Fundo mais escuro */
+            border: 1px solid #444;
+        }
+
+        .modo-escuro .login-card button,
+        .modo-escuro .acessibilidade button {
+            background-color: #444;
+            color: #eee;
+            border-color: #666;
+        }
+
+        .modo-escuro .login-card button:hover,
+        .modo-escuro .acessibilidade button:hover {
+            background-color: #555;
+            border-color: #777;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botões de Acessibilidade -->
+    <div class="acessibilidade">
+        <button id="aumentar-fonte">A+</button>
+        <button id="diminuir-fonte">A-</button>
+        <button id="toggle-tema">Modo Escuro</button>
+    </div>
+
+    <main class="login-card">
+        <img src="favicon.ico" alt="Imagem do cartão">
+        <h2>Login</h2>
+        <label for="email">Seu e-mail</label>
+        <input type="email" id="email" name="Email" placeholder="*********@gmail.com">
+        <label for="password">Sua senha</label>
+        <input type="password" id="password" name="Senha" placeholder="*********">
+        <button type="button">Entrar</button>
+    </main>
+
+    <div class="Cadastre">
+        <p>
+            <a href="escolhercadastro.html">Não tem conta? <br> Cadastre-se agora!</a>
+        </p>
+    </div>
+
+    <script>
+        // Alternância de modo escuro
+        const toggleTemaBtn = document.getElementById("toggle-tema");
+        toggleTemaBtn.addEventListener("click", () => {
+            document.body.classList.toggle("modo-escuro");
+        });
+
+        let fontSize = 16;
+        const aumentarFonteBtn = document.getElementById("aumentar-fonte");
+        const diminuirFonteBtn = document.getElementById("diminuir-fonte");
+
+        function ajustarFonte(tamanho) {
+            document.querySelectorAll('body, input, button, h1, label, p, a').forEach(el => {
+                el.style.fontSize = `${tamanho}px`;
+            });
+        }
+
+        aumentarFonteBtn.addEventListener("click", () => {
+            if (fontSize < 24) { // Limite máximo sugerido
+                fontSize += 2;
+                ajustarFonte(fontSize);
+            }
+        });
+
+        diminuirFonteBtn.addEventListener("click", () => {
+            if (fontSize > 12) { // Limite mínimo sugerido
+                fontSize -= 2;
+                ajustarFonte(fontSize);
+            }
+        });
+    </script>
+</body>
+</html>

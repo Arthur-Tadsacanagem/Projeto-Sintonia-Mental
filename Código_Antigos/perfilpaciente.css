@@ -1,0 +1,443 @@
+!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sintonia Mental - Login Paciente</title>< !-- Favicon --><link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">< !-- Fontes --><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">< !-- Ícones (Font Awesome para o olhinho) --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"><link rel="stylesheet" href="css_paginas/pagLogin.css"><style>
+
+/* === ESTILOS GERAIS === */
+body {
+    background: url('FUNDO.jpg') no-repeat center center/cover;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #648097;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/FUNDO.jpg') no-repeat center center/cover;
+    z-index: -1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+body.dark-mode {
+    color: #e0e0e0;
+    background-color: #121212;
+}
+
+body.dark-mode::before {
+    opacity: 0.2;
+    background-color: rgba(0, 0, 0, 0.8);
+    mix-blend-mode: multiply;
+}
+
+/* === CARD DE LOGIN === */
+.login-card,
+.Cadastre {
+    border-radius: 15px;
+    padding: 30px;
+    width: 350px;
+    text-align: center;
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.502);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+}
+
+.login-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.login-card label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    box-sizing: border-box;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 15px;
+    background-color: #ffffff;
+    color: #333;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    margin-top: 10px;
+}
+
+.login-card button:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+.login-card button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+/* === MENSAGENS DE ERRO === */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* === ACESSIBILIDADE === */
+.acessibilidade {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.acessibilidade button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+}
+
+.acessibilidade button:hover {
+    background-color: #bbb;
+}
+
+/* === MODO ESCURO === */
+body.dark-mode {
+    background-color: #353131;
+    color: #e0e0e0;
+}
+
+body.dark-mode .login-card,
+body.dark-mode .Cadastre {
+    background-color: rgba(50, 50, 50, 0.9);
+    border: 1px solid #444;
+}
+
+body.dark-mode .login-card button,
+body.dark-mode .acessibilidade button {
+    background-color: #444;
+    color: #eee;
+    border-color: #666;
+}
+
+body.dark-mode .login-card button:hover,
+body.dark-mode .acessibilidade button:hover {
+    background-color: #555;
+    border-color: #777;
+}
+
+body.dark-mode {
+    background-color: #121212;
+}
+
+body.dark-mode::before {
+    opacity: 0.5;
+}
+
+/* === REMOÇÃO DO LAYOUT EM DUAS COLUNAS === */
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilo específico para o botão de alternância de senha */
+.input-with-icon {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+/* === BLOQUEIO DE LOGIN === */
+.blocked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.blocked-overlay p {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.countdown {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.attempts-warning {
+    color: #ff6600;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    text-align: center;
+}
+
+</style></head><body>< !-- Acessibilidade --><div class="acessibilidade"><button id="aumentar-fonte">A+</button><button id="diminuir-fonte">A-</button><button id="toggle-tema">Modo Escuro</button></div>< !-- Conteúdo Principal --><main class="login-card"><div id="blockedOverlay" class="blocked-overlay" style="display: none;"><p>Login bloqueado temporariamente</p><p>Tente novamente em:</p><div id="countdown" class="countdown">01:00</div></div><form id="loginPacienteForm"><img src="img/favicon.ico" alt="Logo Sintonia Mental"><h2>Login Paciente</h2><div class="form-group"><label for="login">E-mail</label><input type="email" name="login" id="login" placeholder="Seu e-mail" required></div><div class="form-group"><label for="senha">Senha</label><div class="input-with-icon"><input type="password" name="senha" id="senha" placeholder="Sua senha" required><i class="fas fa-eye toggle-password" id="togglePassword"></i></div></div><div id="attemptsWarning" class="attempts-warning" style="display: none;"></div><button type="submit" id="submitButton">Entrar</button></form></main><div class="Cadastre"><p><a href="escolhercadastro.html">Não tem conta? <br>Cadastre-se agora !</a></p></div><script> // Alternância de modo escuro
+const toggleTemaBtn=document.getElementById("toggle-tema");
+
+toggleTemaBtn.addEventListener("click", ()=> {
+        document.body.classList.toggle("dark-mode");
+    });
+
+// Controle de tamanho de fonte
+let fontSize=16;
+const aumentarFonteBtn=document.getElementById("aumentar-fonte");
+const diminuirFonteBtn=document.getElementById("diminuir-fonte");
+
+function ajustarFonte(tamanho) {
+    document.querySelectorAll('body, input, button, h1').forEach(el=> {
+            el.style.fontSize=`$ {
+                tamanho
+            }
+
+            px`;
+        });
+}
+
+aumentarFonteBtn.addEventListener("click", ()=> {
+        fontSize +=2;
+        ajustarFonte(fontSize);
+    });
+
+diminuirFonteBtn.addEventListener("click", ()=> {
+        if (fontSize > 12) {
+            fontSize -=2;
+            ajustarFonte(fontSize);
+        }
+    });
+
+// Mostrar/ocultar senha
+const togglePassword=document.getElementById('togglePassword');
+const senhaInput=document.getElementById('senha');
+
+togglePassword.addEventListener('click', function() {
+        // Alterna entre type password e text
+        const type=senhaInput.getAttribute('type')==='password' ? 'text' : 'password';
+        senhaInput.setAttribute('type', type);
+
+        // Alterna o ícone do olho
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+
+// Sistema de bloqueio após tentativas
+const MAX_ATTEMPTS=3;
+const BLOCK_TIME=60; // 60 segundos (1 minuto)
+
+// Inicializar tentativas no localStorage se não existir
+if ( !localStorage.getItem('loginPacienteAttempts')) {
+    localStorage.setItem('loginPacienteAttempts', '0');
+}
+
+// Verificar se está bloqueado
+const blockUntil=localStorage.getItem('loginPacienteBlockUntil');
+const loginAttempts=parseInt(localStorage.getItem('loginPacienteAttempts'));
+const submitButton=document.getElementById('submitButton');
+const blockedOverlay=document.getElementById('blockedOverlay');
+const countdownElement=document.getElementById('countdown');
+const attemptsWarning=document.getElementById('attemptsWarning');
+
+// Mostrar aviso de tentativas restantes
+if (loginAttempts > 0) {
+    const remainingAttempts=MAX_ATTEMPTS - loginAttempts;
+
+    attemptsWarning.textContent=`Atenção: $ {
+        remainingAttempts
+    }
+
+    tentativa(s) restante(s) antes do bloqueio.`;
+    attemptsWarning.style.display='block';
+}
+
+// Verificar se está bloqueado
+if (blockUntil && Date.now() < parseInt(blockUntil)) {
+    // Calcular tempo restante
+    const remainingTime=Math.ceil((parseInt(blockUntil) - Date.now()) / 1000);
+    startCountdown(remainingTime);
+}
+
+else if (blockUntil && Date.now() >=parseInt(blockUntil)) {
+    // Remover bloqueio se o tempo expirou
+    localStorage.removeItem('loginPacienteBlockUntil');
+    localStorage.setItem('loginPacienteAttempts', '0');
+}
+
+// Função para iniciar contagem regressiva
+function startCountdown(seconds) {
+    // Bloquear formulário
+    submitButton.disabled=true;
+    blockedOverlay.style.display='flex';
+
+    let remaining=seconds;
+    updateCountdownDisplay(remaining);
+
+    const countdownInterval=setInterval(()=> {
+            remaining--;
+            updateCountdownDisplay(remaining);
+
+            if (remaining <=0) {
+                clearInterval(countdownInterval);
+                // Liberar formulário
+                submitButton.disabled=false;
+                blockedOverlay.style.display='none';
+                localStorage.removeItem('loginPacienteBlockUntil');
+                localStorage.setItem('loginPacienteAttempts', '0');
+                attemptsWarning.style.display='none';
+            }
+        }
+
+        , 1000);
+}
+
+// Atualizar display do contador
+function updateCountdownDisplay(seconds) {
+    const minutes=Math.floor(seconds / 60);
+    const remainingSeconds=seconds % 60;
+
+    countdownElement.textContent=`$ {
+        minutes.toString().padStart(2, '0')
+    }
+
+    :$ {
+        remainingSeconds.toString().padStart(2, '0')
+    }
+
+    `;
+}
+
+// Envio do formulário
+document.getElementById('loginPacienteForm').addEventListener('submit', async (e)=> {
+        e.preventDefault();
+
+        const login=document.getElementById('login').value;
+        const senha=document.getElementById('senha').value;
+
+        const params=new URLSearchParams();
+        params.append('login', login);
+        params.append('senha', senha);
+
+        try {
+            const response=await fetch('/login-paciente', {
+
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+
+                ,
+                body: params,
+                credentials: 'include'
+            });
+
+        const result=await response.json();
+
+        if (result.success && result.redirect) {
+            // Login bem-sucedido - resetar contador de tentativas
+            localStorage.setItem('loginPacienteAttempts', '0');
+            window.location.href=result.redirect;
+        }
+
+        else if (result.error) {
+            // Login falhou - incrementar tentativas
+            let currentAttempts=parseInt(localStorage.getItem('loginPacienteAttempts')) || 0;
+            currentAttempts++;
+            localStorage.setItem('loginPacienteAttempts', currentAttempts.toString());
+
+            // Atualizar aviso de tentativas
+            const remainingAttempts=MAX_ATTEMPTS - currentAttempts;
+
+            if (remainingAttempts > 0) {
+                attemptsWarning.textContent=`Atenção: $ {
+                    remainingAttempts
+                }
+
+                tentativa(s) restante(s) antes do bloqueio.`;
+                attemptsWarning.style.display='block';
+            }
+
+            // Se atingiu o máximo de tentativas, bloquear
+            if (currentAttempts >=MAX_ATTEMPTS) {
+                const blockUntilTime=Date.now() + (BLOCK_TIME * 1000);
+                localStorage.setItem('loginPacienteBlockUntil', blockUntilTime.toString());
+                startCountdown(BLOCK_TIME);
+            }
+
+            alert(result.message || 'Erro no login');
+        }
+    }
+
+    catch (error) {
+        console.error('Erro ao conectar com o servidor:', error);
+        alert('Erro ao conectar com o servidor');
+    }
+});
+</script></body>
+
+
+</html>

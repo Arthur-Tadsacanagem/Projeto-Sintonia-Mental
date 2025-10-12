@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Perfil</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; padding: 20px; }
+        .welcome { color: #2c3e50; }
+        .feedback-btn {
+            background: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="welcome">Bem-vindo, <%= paciente.nome %>!</h1>
+    
+    <h2>Seu Histórico</h2>
+    <!-- Lista de consultas aqui -->
+    
+    <a href="/feedback?atendimento_id=123" class="feedback-btn">
+        Avaliar último atendimento
+    </a>
+
+    <a href="/logout" style="display: block; margin-top: 20px;">Sair</a>
+</body>
+</html>

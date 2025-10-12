@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Paciente</title>
+    <link rel="stylesheet" href="perfilpaciente.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <img src="iconepng.png" alt="Avatar" class="profile-avatar">
+                <div class="profile-info">
+                    <h3 id="nomePerfil">Nome do Usuário</h3>
+                    <p id="emailPerfil">E-mail: usuario@email.com</p>
+                    <a href="#" class="forgot-password">Esqueci minha senha</a>
+                    <a href="home.html" class="navigate">Navegar</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Recupera os dados do localStorage
+        const nome = localStorage.getItem('nome');
+        const email = localStorage.getItem('email');
+
+        // Exibe os dados na página, se disponíveis
+        document.getElementById('nomePerfil').innerText = nome || 'Nome do Usuário';
+        document.getElementById('emailPerfil').innerText = `E-mail: ${email || 'usuario@email.com'}`;
+    </script>
+</body>
+</html>

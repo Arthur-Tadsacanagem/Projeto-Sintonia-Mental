@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintonia Mental - Feedback</title>
+    <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+    <!-- Botões de Acessibilidade -->
+    <div class="acessibilidade">
+        <button id="aumentar-fonte">A+</button>
+        <button id="diminuir-fonte">A-</button>
+        <button id="toggle-tema">Modo Escuro</button>
+    </div>
+
+    <!-- Barra de Navegação -->
+    <header>
+        <h1><img src="favicon.ico" alt="icon" class="icon"> Sintonia Mental</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="perfilpsicologo.html">Perfil</a></li>
+                <li>Feedback</li>
+                <li><a href="pagLogin.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Card de Feedback -->
+    <div class="feedback-card">
+        <h2>Feedback</h2>
+        <div id="feedbackSection">
+            <form id="feedbackForm">
+                <label>Nome do Psicólogo:</label>
+                <input type="text" id="psychologistName" required>
+
+                <label>Data da Consulta:</label>
+                <input type="date" id="consultDate" required>
+
+                <label>Feedback:</label>
+                <textarea id="feedbackText" rows="4" required></textarea>
+
+                <label>Avaliação:</label>
+                <div class="star-rating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+
+                <button type="submit">Enviar</button>
+            </form>
+            <div id="feedbackListContainer" class="feedback-list">
+                <h2>Feedbacks Recebidos</h2>
+                <div id="feedbackContainer"></div> <!-- Contêiner onde o feedback será adicionado -->
+            </div>
+        </div>
+    </div>
+
+    <script src="feedback.js"></script>
+</body>
+</html>
