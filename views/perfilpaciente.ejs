@@ -254,33 +254,88 @@
             }
         }
         
-        /* Estilos da barra de acessibilidade (mantidos do seu código) */
-        .acessibilidade {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            gap: 10px;
-        }
+        /*/* --- Reposicionamento e Estrutura --- */
+.acessibilidade {
+    position: fixed; /* Fixado na tela */
+    top: 20px;
+    left: 20px; /* Canto superior ESQUERDO */
+    right: auto; /* Anula o 'right: 20px' do seu código anterior */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column; /* Empilhados (um embaixo do outro) */
+    gap: 10px;
+}
 
-        .acessibilidade button,
-        .acessibilidade a {
-            padding: 8px 12px;
-            background: #3a5a9f;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
+/* --- Estilo Visual: Branco e Redondo (Circular) --- */
+.acessibilidade button,
+.acessibilidade a {
+    /* Base de design do Login: Branco, Borda e Arredondamento */
+    padding: 0; /* Remove padding interno, usa width/height fixo */
+    font-size: 1.1rem;
+    border: 2px solid #ddd; /* Borda para contraste */
+    
+    /* Faz o botão ficar REDONDO e com tamanho fixo */
+    width: 45px; 
+    height: 45px;
+    border-radius: 50%; /* Torna o botão CIRCULAR */
+    
+    background-color: #ffffff; /* Fundo BRANCO (Coerência com Login) */
+    color: #333; /* Cor escura do texto/ícone */
+    
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    
+    /* Centraliza o conteúdo (texto ou ícone) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .acessibilidade button:hover,
-        .acessibilidade a:hover {
-            background: #2c3e50;
-        }
+/* --- Estado Hover --- */
+.acessibilidade button:hover,
+.acessibilidade a:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+    color: #000;
+    transform: scale(1.05); /* Pequeno destaque no hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Modo Escuro (Dark Mode) --- */
+body.dark-mode .acessibilidade button,
+body.dark-mode .acessibilidade a {
+    /* Estilo Dark Mode unificado do Login */
+    background-color: #444;
+    color: #eee;
+    border-color: #666;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .acessibilidade button:hover,
+body.dark-mode .acessibilidade a:hover {
+    background-color: #555;
+    border-color: #777;
+    color: white;
+}
+
+/* --- Responsividade (Para não ocupar a tela em Mobile) --- */
+@media (max-width: 768px) {
+    .acessibilidade { 
+        top: 10px; 
+        left: 10px; 
+        flex-direction: row; /* Em telas pequenas, volta a ser horizontal */
+        gap: 8px;
+    }
+    .acessibilidade button, .acessibilidade a {
+        width: 35px; /* Menor em mobile */
+        height: 35px; 
+        font-size: 0.9rem;
+    }
+}
     </style>
 </head>
 

@@ -215,6 +215,29 @@ a:hover {
     background-color: #f0f0f0;
     border-color: #999;
 }
+.acessibilidade a {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #333;
+    text-decoration: none; /* remove o sublinhado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* Efeito hover igual aos botões */
+.acessibilidade a:hover,
+.acessibilidade button:hover {
+    background-color: #f0f0f0;
+    border-color: #bbb;
+    color: #000;
+}
+
 
 /* === MODO ESCURO (dark-mode) === */
 body.dark-mode {

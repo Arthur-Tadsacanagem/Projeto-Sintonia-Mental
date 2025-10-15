@@ -136,30 +136,83 @@
 
         /* Estilos da barra de acessibilidade (mantidos) */
         .acessibilidade {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 8px;
-            padding: 10px;
-            display: flex;
-            gap: 10px;
-            z-index: 1000;
-        }
+    position: fixed;
+    top: 20px;
+    left: 20px; /* Canto superior ESQUERDO */
+    right: auto; /* Anula qualquer regra de alinhamento à direita */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column; /* Empilha os botões */
+    gap: 10px;
+}
 
-        .acessibilidade button {
-            background-color: #3a5a9f; /* Cor primária do perfil */
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
+/* Aplica o estilo de botão CIRCULAR e com tamanho fixo aos botões/links de acessibilidade */
+.acessibilidade button,
+.acessibilidade a {
+    /* Força o botão a ser um círculo de tamanho fixo */
+    width: 45px !important; 
+    height: 45px !important;
+    border-radius: 50% !important; /* Torna o botão CIRCULAR */
+    padding: 0; 
+    
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    
+    background-color: #ffffff; /* Fundo BRANCO (Coerência com Login) */
+    color: #333; /* Cor escura do texto/ícone */
+    
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    
+    /* Centraliza o conteúdo (texto ou ícone) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .acessibilidade button:hover {
-            background-color: #2c3e50;
-        }
+/* Estado Hover */
+.acessibilidade button:hover,
+.acessibilidade a:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
 
+/* --- DARK MODE (APENAS ACESSIBILIDADE) --- */
+body.dark-mode .acessibilidade button,
+body.dark-mode .acessibilidade a {
+    background-color: #444;
+    color: #eee;
+    border-color: #666;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .acessibilidade button:hover,
+body.dark-mode .acessibilidade a:hover {
+    background-color: #555;
+    border-color: #777;
+    color: white;
+}
+
+/* --- RESPONSIVIDADE (AJUSTE DA ACESSIBILIDADE PARA MOBILE) --- */
+@media (max-width: 768px) {
+    .acessibilidade { 
+        top: 10px; 
+        left: 10px; 
+        right: auto;
+        flex-direction: row; /* Desfaz o empilhamento em telas pequenas */
+        gap: 8px;
+    }
+    .acessibilidade button, .acessibilidade a {
+        width: 35px !important; /* Menor em mobile */
+        height: 35px !important; 
+        font-size: 0.9rem;
+    }
+}
         .hidden { display: none; }

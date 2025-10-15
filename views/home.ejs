@@ -495,32 +495,88 @@
     }
 
 
-    /* Acessibilidade (A+, A-) */
-    .acessibilidade {
-      position: fixed;
-      top: 80px;
-      right: 20px;
-      z-index: 9999;
-      display: flex;
-      gap: 10px;
+   /* === ACESSIBILIDADE (Canto Esquerdo e Empilhado) === */
+.acessibilidade {
+    position: fixed;
+    top: 800px;
+    right: 20px; /* Movido para o canto esquerdo */
+    
+    z-index: 9999;
+    display: flex;
+    flex-direction: column; /* Empilha os botões */
+    gap: 10px;
+}
+
+.acessibilidade button,
+.acessibilidade a {
+    /* Estilo dos Botões de Login: Branco e Redondo */
+    padding: 0; 
+    font-size: 1.1rem;
+    border: 2px solid #ddd; /* Borda para contraste */
+    
+    /* Torna o botão CIRCULAR e com tamanho fixo */
+    width: 45px; 
+    height: 45px;
+    border-radius: 50%; 
+    
+    background-color: #ffffff; /* Fundo BRANCO */
+    color: #333; /* Cor escura do texto/ícone */
+    
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    
+    /* Centraliza o conteúdo (texto ou ícone) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estado Hover */
+.acessibilidade button:hover,
+.acessibilidade a:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* --- DARK MODE (APENAS ACESSIBILIDADE) --- */
+body.dark-mode .acessibilidade button,
+body.dark-mode .acessibilidade a {
+    background-color: #444;
+    color: #eee;
+    border-color: #666;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .acessibilidade button:hover,
+body.dark-mode .acessibilidade a:hover {
+    background-color: #555;
+    border-color: #777;
+    color: white;
+}
+
+/* --- RESPONSIVIDADE (AJUSTE DA ACESSIBILIDADE PARA MOBILE) --- */
+@media (max-width: 768px) {
+    /* Desfaz o empilhamento e usa o canto esquerdo em mobile */
+    .acessibilidade { 
+        top: 10px; 
+        left: 10px; 
+        right: auto;
+        flex-direction: row; 
+        gap: 8px;
     }
-
-    .acessibilidade button {
-      padding: 8px 12px;
-      background: #3a5a9f;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
+    .acessibilidade button, .acessibilidade a {
+        width: 35px; /* Menor em mobile */
+        height: 35px; 
+        font-size: 0.9rem;
     }
-
-    .acessibilidade button:hover {
-      background: #2c3e50;
-    }
-
-
+}
     /* DARK MODE */
     body.dark-mode {
       background-color: #121212 !important;

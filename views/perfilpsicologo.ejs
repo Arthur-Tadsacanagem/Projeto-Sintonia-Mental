@@ -331,31 +331,84 @@
                 }
 
                 .acessibilidade {
-                    position: absolute;
-                    top: 20px;
-                    right: 20px;
-                    z-index: 9999;
-                    display: flex;
-                    gap: 10px;
-                }
+    position: fixed;
+    top: 20px;
+    left: 20px; /* Canto superior ESQUERDO */
+    right: auto;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column; /* Empilha os botões */
+    gap: 10px;
+}
 
-                .acessibilidade button,
-                .acessibilidade a {
-                    padding: 8px 12px;
-                    background: #3a5a9f;
-                    color: #fff;
-                    border: none;
-                    border-radius: 8px;
-                    font-weight: bold;
-                    cursor: pointer;
-                    text-decoration: none;
-                    transition: background 0.3s ease;
-                }
+/* Aplica o estilo de botão CIRCULAR e com tamanho fixo APENAS aos botões de acessibilidade */
+.acessibilidade button,
+.acessibilidade a {
+    /* Força o botão a ser um círculo de tamanho fixo */
+    width: 45px !important; 
+    height: 45px !important;
+    border-radius: 50% !important; /* Torna o botão CIRCULAR */
+    padding: 0; 
+    
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    
+    background-color: #ffffff;
+    color: #333; 
+    
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    
+    /* Centraliza o conteúdo (texto ou ícone) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-                .acessibilidade button:hover,
-                .acessibilidade a:hover {
-                    background: #2c3e50;
-                }
+/* Estado Hover */
+.acessibilidade button:hover,
+.acessibilidade a:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* --- DARK MODE --- */
+body.dark-mode .acessibilidade button,
+body.dark-mode .acessibilidade a {
+    background-color: #444;
+    color: #eee;
+    border-color: #666;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .acessibilidade button:hover,
+body.dark-mode .acessibilidade a:hover {
+    background-color: #555;
+    border-color: #777;
+    color: white;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .acessibilidade { 
+        top: 10px; 
+        left: 10px; 
+        flex-direction: row; 
+        gap: 8px;
+    }
+    .acessibilidade button, .acessibilidade a {
+        width: 35px !important; 
+        height: 35px !important; 
+        font-size: 0.9rem;
+    }
+}
 
                 body.dark-mode {
                     background-color: #121212 !important;
