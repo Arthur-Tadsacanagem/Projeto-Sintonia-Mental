@@ -204,4 +204,56 @@
                 console.error('Erro ao conectar com o servidor:', error);
                 alert('Erro ao conectar com o servidor');
             }
+
+            //captcha
+            document.getElementById('registrationForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Impede o envio tradicional (HTML)
+
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // O TOKEN CRUCIAL DO CAPTCHA!
+    // Ele é automaticamente adicionado ao formData pelo widget do reCAPTCHA
+    const recaptchaToken = formData.get('g-recaptcha-response');
+
+    if (!recaptchaToken) {
+        alert('Por favor, complete o reCAPTCHA.');
+        return; 
+    }
+    
+    // Coleta outros dados do formulário (username, password, etc.)
+    const data = {
+        email: formData.get('email'), // Exemplo de um campo
+        password: formData.get('password'), // Exemplo de outro campo
+        recaptcha: recaptchaToken // O token que o back-end irá verificar
+    };
+
+    // Enviar os dados para o endpoint de registro no Node.js
+    try {
+        const response = await fetch('/register', { // O endpoint que criaremos no Node.js
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            alert('Registro realizado com sucesso!');
+            form.reset();
+            // Opcional: recarrega o reCAPTCHA para novos envios (limpa o token)
+            grecaptcha.reset(); 
+        } else {
+            // Pode ser erro de registro OU erro de CAPTCHA!
+            alert('Erro no registro: ' + result.message);
+            grecaptcha.reset(); // Reseta para que o usuário tente novamente
+        }
+
+    } catch (error) {
+        console.error('Erro ao conectar com o servidor:', error);
+        alert('Falha na comunicação com o servidor. Tente novamente.');
+    }
+});
         });

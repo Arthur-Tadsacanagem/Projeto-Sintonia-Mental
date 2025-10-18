@@ -7,344 +7,306 @@
     <title>Meu Perfil de Paciente</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* === ESTILOS GERAIS (COPIADO DO PSICÓLOGO) === */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            /* Usando Poppins por consistência */
-        }
-
-        body {
-            /* Mantendo o estilo do body do psicólogo para o background */
-            background: url('https://images.pexels.com/photos/53594/lake-sunrise-fog-morning-53594.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f8f9fa;
-            padding: 20px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            width: 90%;
-            max-width: 1200px;
-            height: auto;
-            max-height: 90vh; /* Ajustado para melhor visualização do histórico */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border-radius: 15px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Barra Lateral (Sidebar) */
-        .sidebar {
-            width: 100%;
-            background: linear-gradient(135deg, #3a5a9f 0%, #2c3e50 100%);
-            padding: 30px 20px;
-            color: white;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .profile-section {
-            margin-bottom: 30px;
-            width: 100%;
-        }
-
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-            object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .sidebar h2 {
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-
-        .sidebar .profile-title {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .contact-info {
-            margin-top: 20px;
-            text-align: left;
-            width: 100%;
-            max-width: 200px;
-        }
-
-        .contact-info h3 {
-            margin-bottom: 15px;
-            font-size: 1.4em;
-            position: relative;
-            padding-bottom: 5px;
-        }
-
-        .contact-info h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: white;
-        }
-
-        .contact-info p {
-            margin-bottom: 10px;
-            font-size: 1em;
-        }
-
-        /* Conteúdo Principal (Main Content) */
-        .main-content {
-            width: 100%;
-            padding: 30px;
-            overflow-y: auto;
-        }
-
-        .main-content h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #2c3e50;
-            font-weight: 600;
-            position: relative;
-        }
-        
-        /* Botões e Navegação */
-        button,
-        .navigate {
-            padding: 14px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #3a5a9f 0%, #2980b9 100%);
-            color: white;
-            border: none;
-            font-weight: 500;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: inline-block;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
-            font-size: 16px;
-            text-decoration: none;
-            width: 100%;
-            margin-top: 15px;
-        }
-        
-        .navigate {
-            /* Estilo específico para link dentro do sidebar */
-            margin-top: 30px;
-            text-transform: uppercase;
-        }
-
-        button:hover,
-        .navigate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
-            background: linear-gradient(135deg, #2980b9 0%, #3a5a9f 100%);
-        }
-
-        /* Estilo da Tabela de Atendimentos */
-        .atendimentos-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .atendimentos-table th,
-        .atendimentos-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        .atendimentos-table th {
-            background-color: #f2f2f2;
-            color: #333;
-        }
-
-        .no-data {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-        }
-
-        .feedback-btn {
-            background: #27ae60; /* Verde para Avaliação */
-            color: white;
-            padding: 8px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.9em;
-            transition: background 0.3s;
-        }
-        .feedback-btn:hover {
-            background: #219653;
-        }
-
-        /* === MODO ESCURO === */
-        body.dark-mode {
-            background-color: #121212 !important;
-            color: #e0e0e0 !important;
-        }
-
-        body.dark-mode .container {
-            background: rgba(30, 30, 30, 0.95) !important;
-            color: #e0e0e0 !important;
-        }
-
-        body.dark-mode .main-content {
-            background-color: #1e1e1e !important;
-            color: #e0e0e0 !important;
-        }
-        
-        body.dark-mode .atendimentos-table th {
-            background-color: #333;
-            color: #e0e0e0;
-        }
-        
-        body.dark-mode .atendimentos-table th,
-        body.dark-mode .atendimentos-table td {
-            border-color: #555;
-        }
-        
-        body.dark-mode .feedback-btn {
-             background: #1abc9c;
-        }
-        body.dark-mode .feedback-btn:hover {
-            background: #14a383;
-        }
-
-        /* Media Queries para Desktop */
-        @media (min-width: 768px) {
-            .container {
-                flex-direction: row;
-                height: 80vh;
-                max-height: 700px;
-            }
-            .sidebar {
-                width: 300px;
-                min-width: 250px;
-                padding: 40px 30px;
-            }
-            .main-content {
-                width: calc(100% - 300px);
-                padding: 40px;
-            }
-        }
-        
-        /*/* --- Reposicionamento e Estrutura --- */
-.acessibilidade {
-    position: fixed; /* Fixado na tela */
-    top: 20px;
-    left: 20px; /* Canto superior ESQUERDO */
-    right: auto; /* Anula o 'right: 20px' do seu código anterior */
-    z-index: 9999;
-    display: flex;
-    flex-direction: column; /* Empilhados (um embaixo do outro) */
-    gap: 10px;
+        /* === ESTILOS GERAIS (COPIADO DO PSICÓLOGO) — COM PALETA APLICADA === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* --- Estilo Visual: Branco e Redondo (Circular) --- */
-.acessibilidade button,
-.acessibilidade a {
-    /* Base de design do Login: Branco, Borda e Arredondamento */
-    padding: 0; /* Remove padding interno, usa width/height fixo */
-    font-size: 1.1rem;
-    border: 2px solid #ddd; /* Borda para contraste */
-    
-    /* Faz o botão ficar REDONDO e com tamanho fixo */
-    width: 45px; 
-    height: 45px;
-    border-radius: 50%; /* Torna o botão CIRCULAR */
-    
-    background-color: #ffffff; /* Fundo BRANCO (Coerência com Login) */
-    color: #333; /* Cor escura do texto/ícone */
-    
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    
-    /* Centraliza o conteúdo (texto ou ícone) */
+body {
+    background: url('https://images.pexels.com/photos/53594/lake-sunrise-fog-morning-53594.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
     display: flex;
-    align-items: center;
     justify-content: center;
-    
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    min-height: 100vh;
+    background-color: #cdddec; /* cor de fundo principal */
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- Estado Hover --- */
-.acessibilidade button:hover,
-.acessibilidade a:hover {
-    background-color: #f0f0f0;
-    border-color: #999;
-    color: #000;
-    transform: scale(1.05); /* Pequeno destaque no hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    max-height: 90vh;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.95); /* cards brancos */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(170, 190, 209, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* --- Modo Escuro (Dark Mode) --- */
-body.dark-mode .acessibilidade button,
-body.dark-mode .acessibilidade a {
-    /* Estilo Dark Mode unificado do Login */
-    background-color: #444;
-    color: #eee;
-    border-color: #666;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-body.dark-mode .acessibilidade button:hover,
-body.dark-mode .acessibilidade a:hover {
-    background-color: #555;
-    border-color: #777;
-    color: white;
+/* Barra Lateral (Sidebar) */
+.sidebar {
+    width: 100%;
+    background: linear-gradient(135deg, #83b1d5 0%, #cdddec 100%); /* nova paleta */
+    padding: 30px 20px;
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-/* --- Responsividade (Para não ocupar a tela em Mobile) --- */
-@media (max-width: 768px) {
-    .acessibilidade { 
-        top: 10px; 
-        left: 10px; 
-        flex-direction: row; /* Em telas pequenas, volta a ser horizontal */
-        gap: 8px;
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.sidebar h2 {
+    font-size: 1.8em;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    font-size: 1em;
+    color: rgba(255,255,255,0.95);
+}
+
+/* Conteúdo Principal (Main Content) */
+.main-content {
+    width: 100%;
+    padding: 30px;
+    overflow-y: auto;
+    background: transparent; /* container já branco */
+}
+
+.main-content h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-weight: 600;
+    position: relative;
+}
+
+/* Botões e Navegação */
+button,
+.navigate {
+    padding: 14px;
+    border-radius: 15px; /* aplicado: 15px */
+    background: linear-gradient(135deg, #83b1d5 0%, #cdddec 100%); /* primário -> secundário */
+    color: #ffffff;
+    border: none;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(131, 177, 213, 0.28);
+    font-size: 16px;
+    text-decoration: none;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.navigate {
+    margin-top: 30px;
+    text-transform: uppercase;
+}
+
+/* Hover: inverte para secundário claro com texto escuro */
+button:hover,
+.navigate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(131, 177, 213, 0.32);
+    background: linear-gradient(135deg, #cdddec 0%, #ffffff 100%);
+    color: #2c3e50;
+}
+
+/* Estilo da Tabela de Atendimentos */
+.atendimentos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: var(--table-bg, #ffffff);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.atendimentos-table th,
+.atendimentos-table td {
+    border: 1px solid rgba(170, 190, 209, 0.6);
+    padding: 12px;
+    text-align: left;
+}
+
+.atendimentos-table th {
+    background-color: #83b1d5; /* cabeçalho na cor primária */
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.atendimentos-table tr:nth-child(even) td {
+    background: #f7fbfd; /* leve variação para linhas pares */
+}
+
+.no-data {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* Feedback button — seguir paleta (usei primária) */
+.feedback-btn {
+    background: linear-gradient(135deg, #83b1d5 0%, #cdddec 100%);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 15px; /* aplicado */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9em;
+    transition: background 0.3s, color 0.3s;
+    box-shadow: 0 4px 10px rgba(131, 177, 213, 0.25);
+}
+.feedback-btn:hover {
+    background: linear-gradient(135deg, #cdddec 0%, #ffffff 100%);
+    color: #2c3e50;
+}
+
+/* ================= ACESSIBILIDADE CSS - ABRIR PARA CIMA (INALTERADO) ================= */
+/* Botão Mestre (Inferior Direito) */
+.acessibilidade-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    transition: all 0.2s ease;
+}
+
+.acessibilidade-toggle:hover {
+    transform: scale(1.05);
+}
+
+/* Painel dos Botões (Abertura para CIMA) */
+.acessibilidade-panel {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 15px;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.acessibilidade-panel.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* === MODO ESCURO (Aplicação Universal) === */
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+    background-image: none !important;
+}
+
+body.dark-mode .container {
+    background: rgba(30, 30, 30, 0.95) !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .main-content {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .sidebar {
+    background: #1e1e1e !important;
+}
+
+body.dark-mode .atendimentos-table th {
+    background-color: #333 !important;
+    color: #e0e0e0 !important;
+}
+
+/* Dark Mode para Botões de Acessibilidade (apenas cores) — mantido */
+body.dark-mode .acessibilidade-toggle,
+body.dark-mode .acessibilidade-panel button,
+body.dark-mode .acessibilidade-panel a {
+    background: #444 !important;
+    color: #eee !important;
+    border-color: #666 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .acessibilidade-toggle:hover,
+body.dark-mode .acessibilidade-panel button:hover,
+body.dark-mode .acessibilidade-panel a:hover {
+    background: #555 !important;
+    border-color: #777 !important;
+    color: white !important;
+}
+
+/* Media Queries para Desktop */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        height: 80vh;
+        max-height: 700px;
     }
-    .acessibilidade button, .acessibilidade a {
-        width: 35px; /* Menor em mobile */
-        height: 35px; 
-        font-size: 0.9rem;
+
+    .sidebar {
+        width: 300px;
+        min-width: 250px;
+        padding: 40px 30px;
+    }
+
+    .main-content {
+        width: calc(100% - 300px);
+        padding: 40px;
     }
 }
+
     </style>
 </head>
 
 <body>
-    <div class="acessibilidade">
-        <button id="aumentar-fonte">A+</button>
-        <button id="diminuir-fonte">A-</button>
-        <button id="toggle-tema">🌙</button>
-        <a href="/home" id="btn-home" class="acessibilidade-btn" title="Voltar para Home">🏠</a>
+    <button class="acessibilidade-toggle" onclick="toggleAcessibilidadePanel()"
+        style="width: 50px; height: 50px; border-radius: 50%; background: #ffffff; color: #333; border: 2px solid #ddd; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-size: 1.5rem; padding: 0; display: flex; justify-content: center; align-items: center;">
+        <i class="fas fa-universal-access"></i>
+    </button>
+
+    <div class="acessibilidade-panel" id="acessibilidadePanel">
+        <button id="aumentar-fonte" class="acessibilidade-btn" title="Aumentar Fonte"
+            style="background: #ffffff; color: #333; border: 2px solid #ddd; border-radius: 50%; width: 45px; height: 45px; min-width: 45px; padding: 0; font-size: 1.1rem; font-weight: 600;">
+            A+
+        </button>
+        <button id="diminuir-fonte" class="acessibilidade-btn" title="Diminuir Fonte"
+            style="background: #ffffff; color: #333; border: 2px solid #ddd; border-radius: 50%; width: 45px; height: 45px; min-width: 45px; padding: 0; font-size: 1.1rem; font-weight: 600;">
+            A-
+        </button>
+        <button id="toggle-tema" class="acessibilidade-btn" title="Alternar Tema Escuro"
+            style="background: #ffffff; color: #333; border: 2px solid #ddd; border-radius: 50%; width: 45px; height: 45px; min-width: 45px; padding: 0; font-size: 1.1rem; font-weight: 600;">
+            🌙
+        </button>
+        <a href="/home" class="acessibilidade-btn" id="btn-home" title="Voltar para Home"
+            style="background: #ffffff; color: #333; border: 2px solid #ddd; border-radius: 50%; width: 45px; height: 45px; min-width: 45px; padding: 0; font-size: 1.1rem; font-weight: 600; display: flex; justify-content: center; align-items: center;">
+            <i class="fas fa-home"></i>
+        </a>
     </div>
 
     <div class="container">
@@ -352,23 +314,25 @@ body.dark-mode .acessibilidade a:hover {
             <div class="profile-section">
                 <% if (paciente && paciente.foto) { %>
                     <img src="<%= paciente.foto %>" alt="Avatar do Paciente" class="profile-avatar">
-                <% } else { %>
-                    <img src="https://via.placeholder.com/120/f39c12/FFFFFF?text=Paciente" alt="Avatar Padrão"
-                        class="profile-avatar">
-                <% } %>
-                <h2>
-                    <%= paciente.nome %>
-                </h2>
-                <p class="profile-title">Paciente</p>
+                    <% } else { %>
+                        <img src="https://via.placeholder.com/120/f39c12/FFFFFF?text=Paciente" alt="Avatar Padrão"
+                            class="profile-avatar">
+                        <% } %>
+                            <h2>
+                                <%= paciente.nome %>
+                            </h2>
+                            <p class="profile-title">Paciente</p>
             </div>
-            
+
             <div class="contact-info">
                 <h3>Minhas Infos</h3>
                 <p>
-                    <i class="fas fa-envelope"></i> <%= paciente.login %>
+                    <i class="fas fa-envelope"></i>
+                    <%= paciente.login %>
                 </p>
                 <p>
-                    <i class="fas fa-phone"></i> <%= paciente.telefone %>
+                    <i class="fas fa-phone"></i>
+                    <%= paciente.telefone %>
                 </p>
                 <a href="/logout" class="navigate">Sair</a>
             </div>
@@ -376,7 +340,7 @@ body.dark-mode .acessibilidade a:hover {
 
         <main class="main-content">
             <h1>Histórico de Atendimentos</h1>
-            
+
             <table class="atendimentos-table">
                 <thead>
                     <tr>
@@ -389,28 +353,36 @@ body.dark-mode .acessibilidade a:hover {
                     <% if (atendimentos && atendimentos.length > 0) { %>
                         <% atendimentos.forEach(atendimento => { %>
                             <tr>
-                                <td><%= atendimento.psicologo_nome %></td>
-                                <td><%= new Date(atendimento.data_inicio).toLocaleDateString('pt-BR') %></td>
+                                <td>
+                                    <%= atendimento.psicologo_nome %>
+                                </td>
+                                <td>
+                                    <%= new Date(atendimento.data_inicio).toLocaleDateString('pt-BR') %>
+                                </td>
                                 <td>
                                     <a href="/feedback?atendimento_id=<%= atendimento.id %>" class="feedback-btn">
                                         Avaliar Atendimento
                                     </a>
                                 </td>
                             </tr>
-                        <% }); %>
-                    <% } else { %>
-                        <tr>
-                            <td colspan="3" class="no-data">Nenhum atendimento encontrado.</td>
-                        </tr>
-                    <% } %>
+                            <% }); %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="3" class="no-data">Nenhum atendimento encontrado.</td>
+                                    </tr>
+                                    <% } %>
                 </tbody>
             </table>
         </main>
     </div>
 
     <script>
-        // --- JS DE ACESSIBILIDADE E MODO ESCURO (Copíado e Unificado) ---
-        
+        // Lógica para mostrar/esconder o painel de acessibilidade
+        function toggleAcessibilidadePanel() {
+            const panel = document.getElementById('acessibilidadePanel');
+            panel.classList.toggle('show');
+        }
+
         // Elementos de acessibilidade
         const toggleTemaBtn = document.getElementById("toggle-tema");
         const aumentarFonteBtn = document.getElementById("aumentar-fonte");
@@ -423,10 +395,10 @@ body.dark-mode .acessibilidade a:hover {
             localStorage.setItem("modoEscuro", isDark);
             toggleTemaBtn.textContent = isDark ? "☀️" : "🌙";
         });
-        
+
         // Lógica de Fonte
-        let fontSize = 16; 
-        
+        let fontSize = 16;
+
         function ajustarFonte(tamanho) {
             document.querySelectorAll('body, h1, h2, h3, p, a, button, table, th, td').forEach(el => {
                 el.style.fontSize = `${tamanho}px`;
@@ -434,14 +406,14 @@ body.dark-mode .acessibilidade a:hover {
         }
 
         aumentarFonteBtn.addEventListener("click", () => {
-            if (fontSize < 24) { 
+            if (fontSize < 24) {
                 fontSize += 2;
                 ajustarFonte(fontSize);
             }
         });
 
         diminuirFonteBtn.addEventListener("click", () => {
-            if (fontSize > 10) { 
+            if (fontSize > 10) {
                 fontSize -= 2;
                 ajustarFonte(fontSize);
             }

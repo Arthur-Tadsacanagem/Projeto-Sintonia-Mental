@@ -1,218 +1,211 @@
 /* === ESTILOS GERAIS (INÍCIO DO TEMA PSICÓLOGO) === */
-        body {
-            font-family: 'Poppins', sans-serif;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa; /* Fundo claro e moderno */
-            color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Estilos para o modo escuro */
-        body.dark-mode {
-            background-color: #121212; /* Fundo escuro total */
-            color: #e0e0e0;
-        }
-        
-        .header h1 {
-            color: #3a5a9f; /* Cor primária do perfil do psicólogo */
-        }
-        body.dark-mode .header h1 {
-            color: #8faed9;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .feedback-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .feedback-card {
-            background: #ffffff; /* Fundo branco no modo claro */
-            padding: 20px;
-            border-radius: 12px; /* Borda mais arredondada */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        body.dark-mode .feedback-card {
-            background: #1e1e1e; /* Fundo escuro do perfil */
-            border-color: #444;
-        }
-
-        .rating {
-            color: #ffc107;
-            font-size: 1.5rem;
-            margin: 10px 0;
-        }
-
-        .paciente-info {
-            font-style: italic;
-            color: #3a5a9f; /* Cor primária para destaque */
-            margin-top: 10px;
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode .paciente-info {
-            color: #a0c4ff;
-        }
-
-        .date {
-            font-size: 0.8rem;
-            color: #999;
-            margin-top: 10px;
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode .date {
-            color: #ccc;
-        }
-
-        /* --- ESTILO DO FORMULÁRIO DE FEEDBACK (CORES DO PSICÓLOGO) --- */
-        .feedback-form {
-            background: #e6f2ff; /* Fundo claro para formulário */
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 40px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        }
-        
-        body.dark-mode .feedback-form {
-            background: #333; /* Fundo escuro para formulário */
-        }
-        
-        body.dark-mode .feedback-form h2 {
-            color: #fff;
-        }
-
-        textarea, select {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            min-height: 100px;
-            border: 1px solid #ccc;
-            border-radius: 8px; /* Mais arredondado */
-            background-color: #fff;
-            color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            font-size: 1rem;
-        }
-
-        body.dark-mode textarea, body.dark-mode select {
-            background-color: #444;
-            color: #eee;
-            border-color: #555;
-        }
-        
-        /* Estilo para botões gerais (CORES MODERNAS) */
-        button {
-            width: 100%;
-            padding: 14px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #3a5a9f 0%, #2980b9 100%);
-            color: white;
-            border: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
-            font-size: 16px;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
-            background: linear-gradient(135deg, #2980b9 0%, #3a5a9f 100%);
-        }
-
-        /* Estilos da barra de acessibilidade (mantidos) */
-        .acessibilidade {
-    position: fixed;
-    top: 20px;
-    left: 20px; /* Canto superior ESQUERDO */
-    right: auto; /* Anula qualquer regra de alinhamento à direita */
-    z-index: 9999;
-    display: flex;
-    flex-direction: column; /* Empilha os botões */
-    gap: 10px;
+body {
+    font-family: 'Poppins', sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa; /* Fundo claro e moderno */
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Aplica o estilo de botão CIRCULAR e com tamanho fixo aos botões/links de acessibilidade */
-.acessibilidade button,
-.acessibilidade a {
-    /* Força o botão a ser um círculo de tamanho fixo */
-    width: 45px !important; 
-    height: 45px !important;
-    border-radius: 50% !important; /* Torna o botão CIRCULAR */
-    padding: 0; 
-    
-    font-size: 1.1rem;
-    border: 2px solid #ddd;
-    
-    background-color: #ffffff; /* Fundo BRANCO (Coerência com Login) */
-    color: #333; /* Cor escura do texto/ícone */
-    
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    
-    /* Centraliza o conteúdo (texto ou ícone) */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Estilos para o modo escuro */
+body.dark-mode {
+    background-color: #121212; /* Fundo escuro total */
+    color: #e0e0e0;
 }
 
-/* Estado Hover */
-.acessibilidade button:hover,
-.acessibilidade a:hover {
-    background-color: #f0f0f0;
-    border-color: #999;
-    color: #000;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.header h1 {
+    color: #3a5a9f; /* Cor primária do perfil do psicólogo */
+}
+body.dark-mode .header h1 {
+    color: #8faed9;
 }
 
-/* --- DARK MODE (APENAS ACESSIBILIDADE) --- */
-body.dark-mode .acessibilidade button,
-body.dark-mode .acessibilidade a {
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.feedback-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.feedback-card {
+    background: #ffffff; /* Fundo branco no modo claro */
+    padding: 20px;
+    border-radius: 12px;
+    /* Borda mais arredondada */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    /* Sombra suave */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .feedback-card {
+    background: #1e1e1e;
+    /* Fundo escuro do perfil */
+    border-color: #444;
+}
+
+.rating {
+    color: #ffc107;
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.paciente-info {
+    font-style: italic;
+    color: #3a5a9f;
+    /* Cor primária para destaque */
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .paciente-info {
+    color: #a0c4ff;
+}
+
+.date {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .date {
+    color: #ccc;
+}
+
+/* --- ESTILO DO FORMULÁRIO DE FEEDBACK (CORES DO PSICÓLOGO) --- */
+.feedback-form {
+    background: #e6f2ff;
+    /* Fundo claro para formulário */
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode .feedback-form {
+    background: #333;
+    /* Fundo escuro para formulário */
+}
+
+body.dark-mode .feedback-form h2 {
+    color: #fff;
+}
+
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    min-height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    /* Mais arredondado */
+    background-color: #fff;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    font-size: 1rem;
+}
+
+body.dark-mode textarea,
+body.dark-mode select {
     background-color: #444;
     color: #eee;
-    border-color: #666;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-color: #555;
 }
 
-body.dark-mode .acessibilidade button:hover,
-body.dark-mode .acessibilidade a:hover {
-    background-color: #555;
-    border-color: #777;
+/* Estilo para botões gerais (CORES MODERNAS) */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #3a5a9f 0%, #2980b9 100%);
     color: white;
+    border: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+    font-size: 16px;
 }
 
-/* --- RESPONSIVIDADE (AJUSTE DA ACESSIBILIDADE PARA MOBILE) --- */
-@media (max-width: 768px) {
-    .acessibilidade { 
-        top: 10px; 
-        left: 10px; 
-        right: auto;
-        flex-direction: row; /* Desfaz o empilhamento em telas pequenas */
-        gap: 8px;
-    }
-    .acessibilidade button, .acessibilidade a {
-        width: 35px !important; /* Menor em mobile */
-        height: 35px !important; 
-        font-size: 0.9rem;
-    }
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
+    background: linear-gradient(135deg, #2980b9 0%, #3a5a9f 100%);
 }
-        .hidden { display: none; }
+
+/* Esconde elementos auxiliares */
+.hidden {
+    display: none;
+}
+
+/*
+* ==========================================================
+* ACESSIBILIDADE CSS (INFERIOR DIREITO, ABERTURA PARA CIMA)
+* ==========================================================
+*/
+
+/* Botão Mestre (Inferior Direito) */
+.acessibilidade-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    transition: all 0.2s ease;
+}
+
+.acessibilidade-toggle:hover {
+    transform: scale(1.05);
+}
+
+/* Painel dos Botões (Abertura para CIMA) */
+.acessibilidade-panel {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    /* Abre para CIMA */
+    gap: 15px;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    /* Começa 20px abaixo */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.acessibilidade-panel.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    /* Sobe para posição final */
+}
+
+/* DARK MODE para Acessibilidade (aplica-se APENAS se estiver no dark-mode) */
+body.dark-mode .acessibilidade-toggle,
+body.dark-mode .acessibilidade-panel a,
+body.dark-mode .acessibilidade-panel button {
+    background: #444 !important;
+    color: #eee !important;
+    border-color: #666 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .acessibilidade-toggle:hover,
+body.dark-mode .acessibilidade-panel a:hover,
+body.dark-mode .acessibilidade-panel button:hover {
+    background: #555 !important;
+    border-color: #777 !important;
+    color: white !important;
+}
+

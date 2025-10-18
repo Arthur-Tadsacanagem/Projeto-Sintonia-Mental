@@ -7,15 +7,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css_paginas/feedback.css">
- 
 </head>
 
-<body>"
-    <div class="acessibilidade">
-        <button id="aumentar-fonte">A+</button>
-        <button id="diminuir-fonte">A-</button>
-        <button id="toggle-tema">🌙</button>
-        <a href="/home" id="btn-home" class="acessibilidade-btn" title="Voltar para Home">🏠</a>
+<body>
+    <button class="acessibilidade-toggle" onclick="toggleAcessibilidadePanel()"
+        style="width: 50px; height: 50px; border-radius: 50%; background: #ffffff; color: #333; border: 2px solid #ddd; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-size: 1.5rem; padding: 0; display: flex; justify-content: center; align-items: center;">
+        <i class="fas fa-universal-access"></i>
+    </button>
+
+    <div class="acessibilidade-panel" id="acessibilidadePanel">
+        <button id="aumentar-fonte" class="acessibilidade-btn" title="Aumentar Fonte"
+            style="background: #ffffff; color: #333; border: 2px solid #ddd; border-radius: 50%; width: 45px; height: 45px; min-width: 45px; padding: 0; font-size: 1.1rem; font-weight: 600;">
+            A+
+        </button>
+        <button id="diminuir-fonte" class="acessibilidade-btn" title="Diminuir Fonte"
+            style="background: #ffffff; color: #333; border: 2px solid #ddd; border-radius: 50%; width: 45px; height: 45px; min-width: 45px; padding: 0; font-size: 1.1rem; font-weight: 600;">
+            A-
+        </button>
+        <button id="toggle-tema" class="acessibilidade-btn" title="Alternar Tema Escuro"
+            style="background: #ffffff; color: #333; border: 2px solid #ddd; border-radius: 50%; width: 45px; height: 45px; min-width: 45px; padding: 0; font-size: 1.1rem; font-weight: 600;">
+            🌙
+        </button>
+        <a href="/home" class="acessibilidade-btn" id="btn-home" title="Voltar para Home"
+            style="background: #ffffff; color: #333; border: 2px solid #ddd; border-radius: 50%; width: 45px; height: 45px; min-width: 45px; padding: 0; font-size: 1.1rem; font-weight: 600; display: flex; justify-content: center; align-items: center;">
+            <i class="fas fa-home"></i>
+        </a>
     </div>
 
     <div class="header">
@@ -24,7 +40,7 @@
     </div>
 
     <div id="all-feedbacks">
-        </div>
+    </div>
 
     <div id="auth-alert" class="hidden">
         <p>Você precisa estar logado como paciente para enviar feedback.</p>
@@ -51,7 +67,6 @@
         </div>
     </div>
     <script src="js_paginas/feedback.js"></script>
-        
-
 </body>
+
 </html>
